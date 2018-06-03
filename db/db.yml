@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+    mysql:
+      image: mariadb:10.3.7
+      restart: always
+      hostname: mysql
+      volumes:
+        - ./data:/var/lib/mysql:delegated
+        - ./conf:/etc/mysql/conf.d

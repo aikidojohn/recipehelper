@@ -1,4 +1,27 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+
 logging:
   level: INFO
   loggers:
     com.johnhite.recipe: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: WARN
+    org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: WARN
+    
+database:
+  driverClass: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://localhost/recipedb
+  user: root
+  password: secret
+  
+  properties:
+    charSet: UTF-8
+    hibernate.dialect: org.hibernate.dialect.MySQLDialect
+    hibernate.show_sql: true

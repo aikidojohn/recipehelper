@@ -1,5 +1,9 @@
 package com.johnhite.recipe.core;
 
+import java.util.List;
+
+import com.google.api.client.util.Lists;
+
 public class Recipe {
 
 	private final int id;
@@ -11,8 +15,10 @@ public class Recipe {
 	private final String description;
 	private final String link;
 	private final String ethnicity;
+	private final List<IngredientAmount> ingredients;
+	
 	public Recipe(int id, String source, String title, int prepTime, int servings, int nutrition, String description,
-			String link, String ethnicity) {
+			String link, String ethnicity, List<IngredientAmount> ingredients) {
 		super();
 		this.id = id;
 		this.source = source;
@@ -23,6 +29,7 @@ public class Recipe {
 		this.description = description;
 		this.link = link;
 		this.ethnicity = ethnicity;
+		this.ingredients = ingredients;
 	}
 	public int getId() {
 		return id;
@@ -51,7 +58,21 @@ public class Recipe {
 	public String getEthnicity() {
 		return ethnicity;
 	}
+	public List<IngredientAmount> getIngredients() {
+		if (ingredients == null) {
+			return Lists.newArrayList();
+		}
+		return ingredients;
+	}
 	
+	@Override
+	public String toString() {
+		return "Recipe [id=" + id + ", source=" + source + ", title=" + title + ", prepTime=" + prepTime + ", servings="
+				+ servings + ", nutrition=" + nutrition + ", description=" + description + ", link=" + link
+				+ ", ethnicity=" + ethnicity + ", ingredients=" + ingredients + "]";
+	}
+
+
 	public static class Builder {
 		private int id;
 		private String source;
@@ -62,9 +83,10 @@ public class Recipe {
 		private String description;
 		private String link;
 		private String ethnicity;
+		private List<IngredientAmount> ingredients;
 		
 		public Recipe build() {
-			return new Recipe(id, source, title, prepTime, servings, nutrition, description, link, ethnicity);
+			return new Recipe(id, source, title, prepTime, servings, nutrition, description, link, ethnicity, ingredients);
 		}
 		public Builder setId(int id) {
 			this.id = id;
@@ -102,5 +124,10 @@ public class Recipe {
 			this.ethnicity = ethnicity;
 			return this;
 		}
+		public Builder setIngredients(List<IngredientAmount> ingredients) {
+			this.ingredients = ingredients;
+			return this;
+		}
+		
 	}
 }
